@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head><meta content="default-src 'none'; style-src * 'unsafe-inline'; script-src * 'unsafe-inline'; img-src * data: blob:; font-src * data:; media-src * data: blob:; connect-src 'none'; form-action 'none'; frame-src 'none'; object-src 'none'; base-uri 'none'" http-equiv="Content-Security-Policy"/>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>黄君杰 (Freddie) - 视频主管 | 作品集</title>
+
+<script src="https://image.uc.cn/s/uae/g/3n/mos-production/0915/3.4.17.js"></script>
+
+<script src="https://image.uc.cn/s/uae/g/3n/mos-production/fontawesome-free-7.1.0-web/js/all.min.js"></script>
+<style>
+        /* 自定义CSS - 使用BEM命名法防止冲突 */
+        .site-header {
+            background: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .site-header.scrolled {
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 191, 255, 0.1);
+        }
+
+        .hero-title span {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.5s ease forwards;
+        }
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .parallax-layer-1 {
+            will-change: transform;
+        }
+        .parallax-layer-2 {
+            will-change: transform;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(to bottom, #00BFFF, transparent);
+        }
+        .timeline__item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 1.5rem;
+        }
+        .timeline__item::before {
+            content: '';
+            position: absolute;
+            left: -0.5rem;
+            top: 0.5rem;
+            width: 1rem;
+            height: 1rem;
+            background: #00BFFF;
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(0, 191, 255, 0.2);
+        }
+        .timeline__content {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+        .timeline__item.active .timeline__content {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 191, 255, 0.15), 0 0 0 1px rgba(166, 110, 255, 0.2);
+        }
+
+        .btn-pulse {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-pulse::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(0, 191, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        .btn-pulse:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .tag-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 固定导航栏高亮 */
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #00BFFF;
+            transition: width 0.3s ease;
+        }
+        .nav-link.active::after {
+            width: 100%;
+        }
+    </style>
+<script>
+!(function(j,a,g){j.__itrace_conf = {bid: 'kt40h0wl-koyh4af8',rel: '', uid: 'f602e8a3-1d17-479d-b4cc-f7294aac3f6c' ,  spa: true, plugins:['jserror','interface','perf','resource','flow','blank']};var b = a.createElement("script");var d = a.getElementsByTagName("script")[0];b.type = "text/javascript";b.crossorigin = true;b.async = true;b.onload = function(){j.__itrace && j.__itrace.setReady()};d.parentNode.insertBefore(b,d);b.src = g})(window, document, "https://g.alicdn.com/woodpeckerx/itrace-next/itrace.iife.js")
+</script>
+</head>
+<body class="bg-[#121212] text-[#E0E0E0] font-sans overflow-x-hidden">
+
+<div class="fixed inset-0 pointer-events-none z-0" id="parallax-bg">
+<div class="parallax-layer-1 absolute inset-0 opacity-20">
+
+<div class="absolute top-1/4 left-1/4 w-64 h-64 border border-[rgba(0,255,255,0.1)] rounded-full"></div>
+<div class="absolute bottom-1/3 right-1/4 w-96 h-96 border border-[rgba(166,110,255,0.1)] rounded-full"></div>
+</div>
+<div class="parallax-layer-2 absolute inset-0 opacity-10">
+
+<canvas id="particle-canvas"></canvas>
+</div>
+</div>
+
+<header class="site-header fixed top-0 left-0 right-0 z-50 py-4 transition-all duration-300">
+<div class="container mx-auto px-4">
+<nav class="flex justify-between items-center">
+<div class="text-xl font-bold">
+<span class="text-[#00BFFF]">F</span>reddie<span class="text-[#A66EFF]">.</span>
+</div>
+<div class="hidden md:flex space-x-8">
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#home">首页</a>
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#advantages">核心优势</a>
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#experience">工作经历</a>
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#portfolio">代表作品</a>
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#achievements">项目成就</a>
+<a class="nav-link text-sm font-medium hover:text-[#00BFFF] transition" href="#contact">联系</a>
+</div>
+<div class="md:hidden">
+<button class="text-[#E0E0E0]" id="mobile-menu-btn">
+<i class="fas fa-bars text-xl"></i>
+</button>
+</div>
+</nav>
+</div>
+
+<div class="md:hidden absolute top-full left-0 right-0 bg-[#1E1E1E] shadow-lg hidden" id="mobile-menu">
+<div class="flex flex-col space-y-4 p-4">
+<a class="nav-link py-2" href="#home">首页</a>
+<a class="nav-link py-2" href="#advantages">核心优势</a>
+<a class="nav-link py-2" href="#experience">工作经历</a>
+<a class="nav-link py-2" href="#portfolio">代表作品</a>
+<a class="nav-link py-2" href="#achievements">项目成就</a>
+<a class="nav-link py-2" href="#contact">联系</a>
+</div>
+</div>
+</header>
+<main class="relative z-10">
+
+<section class="min-h-screen flex items-center relative overflow-hidden pt-20" id="home">
+<div class="container mx-auto px-4 py-16">
+<div class="max-w-4xl mx-auto">
+<div class="mb-8">
+<h1 class="hero-title text-5xl md:text-7xl font-bold mb-4">
+<span class="inline-block">黄</span><span class="inline-block">君</span><span class="inline-block">杰</span>
+<span class="inline-block text-[#00BFFF] ml-2">F</span><span class="inline-block">r</span><span class="inline-block">e</span><span class="inline-block">d</span><span class="inline-block">d</span><span class="inline-block">i</span><span class="inline-block">e</span>
+</h1>
+<div class="text-2xl md:text-3xl mb-6">
+<span class="bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] bg-clip-text text-transparent font-semibold">视频内容主管 / 视频创意设计师</span>
+</div>
+<div class="text-lg text-[#B0B0B0] mb-8">
+                            目标城市：<span class="text-[#00FFC2] font-medium">深圳</span> · 从业经验：<span class="text-[#00FFC2] font-medium">7年</span>
+</div>
+<div class="flex flex-wrap gap-4 mb-8">
+<a class="inline-flex items-center gap-2 bg-[#1E1E1E] hover:bg-[#2A2A2A] px-4 py-2 rounded-lg transition group" href="tel:15217833625">
+<i class="fas fa-phone text-[#00BFFF]"></i>
+<span>15217833625</span>
+</a>
+<a class="inline-flex items-center gap-2 bg-[#1E1E1E] hover:bg-[#2A2A2A] px-4 py-2 rounded-lg transition group" href="mailto:邮件地址未提供">
+<i class="fas fa-envelope text-[#A66EFF]"></i>
+<span>邮件地址未提供</span>
+</a>
+</div>
+</div>
+<div class="fade-in">
+<p class="text-xl leading-relaxed text-[#C0C0C0] max-w-3xl">
+                            专注于为科技与外贸企业提供高质量视频创意解决方案，融合特效制作与团队管理经验，致力于通过视觉叙事提升品牌影响力。
+                        </p>
+</div>
+</div>
+</div>
+
+<div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+<a class="text-[#00BFFF]" href="#advantages">
+<i class="fas fa-chevron-down text-2xl"></i>
+</a>
+</div>
+</section>
+
+<section class="py-20 bg-[#0F0F0F]" id="advantages">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl font-bold mb-4">核心优势</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+
+<div class="card-hover bg-[#1E1E1E] p-6 rounded-xl border border-[rgba(0,191,255,0.1)] fade-in">
+<div class="text-[#00BFFF] text-3xl mb-4">
+<i class="fas fa-layer-group"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">懂基层，从特效剪辑起步</h3>
+<p class="text-[#B0B0B0]">从视觉特效、剪辑合成等基层岗位成长起来，熟悉视频制作全流程，能精准把控每个环节的技术细节与质量。</p>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] p-6 rounded-xl border border-[rgba(166,110,255,0.1)] fade-in">
+<div class="text-[#A66EFF] text-3xl mb-4">
+<i class="fas fa-users"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">团队管理与跨部门协作</h3>
+<p class="text-[#B0B0B0]">具备导演与制片人双重能力，擅长带领创意团队并与客户、市场、产品等多部门高效协同，确保项目顺利交付。</p>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] p-6 rounded-xl border border-[rgba(0,255,194,0.1)] fade-in">
+<div class="text-[#00FFC2] text-3xl mb-4">
+<i class="fas fa-bullseye"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">深度理解客户需求</h3>
+<p class="text-[#B0B0B0]">能够快速洞察客户核心诉求，并将其转化为可执行的创意方案，确保视频内容与品牌战略及营销目标高度契合。</p>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] p-6 rounded-xl border border-[rgba(0,255,255,0.1)] fade-in">
+<div class="text-[#00FFFF] text-3xl mb-4">
+<i class="fas fa-chart-line"></i>
+</div>
+<h3 class="text-xl font-bold mb-3">项目成本测算与团队管理</h3>
+<p class="text-[#B0B0B0]">擅长项目预算规划与成本控制，能根据项目规模合理配置团队资源，在保证质量的同时实现最优投入产出比。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-[#121212]" id="experience">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl font-bold mb-4">工作经历</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] mx-auto"></div>
+</div>
+<div class="max-w-4xl mx-auto">
+<div class="timeline">
+
+<div class="timeline__item fade-in">
+<div class="timeline__content">
+<div class="flex flex-wrap items-baseline gap-2 mb-2">
+<h3 class="text-2xl font-bold">鼎匠创新科技有限公司</h3>
+<span class="text-[#00BFFF] font-medium">视频内容主管</span>
+<span class="text-[#B0B0B0] text-sm">2025.9 – 至今</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">专注于汽车诊断设备研发的外贸科技公司，产品远销欧美、日韩等市场。</p>
+<ul class="space-y-2 text-[#C0C0C0]">
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>组建并管理视频创意团队，负责公司全球品牌视频的内容策划与制作。</span>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>主导产品发布视频、教程视频、社交媒体短视频等多种内容形式的创意与执行。</span>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="timeline__item fade-in">
+<div class="timeline__content">
+<div class="flex flex-wrap items-baseline gap-2 mb-2">
+<h3 class="text-2xl font-bold">FINI Media</h3>
+<span class="text-[#00BFFF] font-medium">创意视频负责人</span>
+<span class="text-[#B0B0B0] text-sm">2024.7 – 2025.8</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">服务全球客户的视频创意与制作机构。</p>
+<ul class="space-y-2 text-[#C0C0C0]">
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>负责带领视频团队完成多个国际品牌的广告片、宣传片制作。</span>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>优化团队工作流程，提升项目交付效率与创意质量。</span>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="timeline__item fade-in">
+<div class="timeline__content">
+<div class="flex flex-wrap items-baseline gap-2 mb-2">
+<h3 class="text-2xl font-bold">深圳虎一科技有限公司</h3>
+<span class="text-[#00BFFF] font-medium">视频创意设计师</span>
+<span class="text-[#B0B0B0] text-sm">2023.9 – 2024.7</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">跨境电商企业，专注于消费电子类产品的海外品牌打造。</p>
+<ul class="space-y-2 text-[#C0C0C0]">
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>负责亚马逊、独立站等平台的产品视频、品牌故事视频创意与制作。</span>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>制作的多条视频素材成为ROI最佳素材，显著提升产品转化率。</span>
+</li>
+</ul>
+</div>
+</div>
+
+<div class="timeline__item fade-in">
+<div class="timeline__content">
+<div class="flex flex-wrap items-baseline gap-2 mb-2">
+<h3 class="text-2xl font-bold">上海荷创数字科技</h3>
+<span class="text-[#00BFFF] font-medium">导演/制片人</span>
+<span class="text-[#B0B0B0] text-sm">2018.11 – 2022.4</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">综合性视频制作公司，服务众多国内外一线品牌。</p>
+<ul class="space-y-2 text-[#C0C0C0]">
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>从零组建视频团队，管理制片、导演、后期等全流程人员。</span>
+</li>
+<li class="flex items-start gap-2">
+<i class="fas fa-check text-[#00FFC2] mt-1"></i>
+<span>服务客户包括华为、VGRASS、联合利华等，交付项目获得客户高度认可。</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-[#0F0F0F]" id="portfolio">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl font-bold mb-4">代表作品</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+
+
+<div class="card-hover bg-[#1E1E1E] rounded-xl overflow-hidden flex flex-col fade-in">
+<div class="image-container aspect-ratio:1/1 overflow-hidden">
+<img alt="星巴克H5动画视频封面：动态咖啡与品牌元素融合的界面设计，用于线上营销活动" class="w-full h-full object-contain" src="https://agent.qianwen.com/mos/e4b00ec247324ebb92aadb1e9383e4e3/96b0dc693ab8e4e3fe388b7348545bc9"/>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<h3 class="text-lg font-bold mb-2">星巴克H5动画</h3>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="tag-float text-xs bg-[rgba(0,191,255,0.2)] text-[#00BFFF] px-2 py-1 rounded">创意设计</span>
+<span class="tag-float text-xs bg-[rgba(166,110,255,0.2)] text-[#A66EFF] px-2 py-1 rounded">动画</span>
+</div>
+<p class="text-sm text-[#B0B0B0] mb-4 flex-grow">为星巴克打造的互动式H5动画营销内容。</p>
+<a class="btn-pulse inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] text-white font-medium py-2 px-4 rounded-lg transition hover:opacity-90 relative overflow-hidden" href="https://www.xinpianchang.com/a11481656?from=UserProfile" target="_blank">
+<i class="fas fa-play"></i>
+<span>观看作品</span>
+</a>
+</div>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] rounded-xl overflow-hidden flex flex-col fade-in">
+<div class="image-container aspect-ratio:1/1 overflow-hidden">
+<img alt="平安银行哪吒信用卡广告视频截图：国潮风格哪吒形象与信用卡结合，红色与金色主色调" class="w-full h-full object-contain" src="https://agent.qianwen.com/mos/e4b00ec247324ebb92aadb1e9383e4e3/1c4eeb8f00f38c7418a275de35f5ff4e"/>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<h3 class="text-lg font-bold mb-2">平安银行-哪吒信用卡</h3>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="tag-float text-xs bg-[rgba(0,191,255,0.2)] text-[#00BFFF] px-2 py-1 rounded">广告片</span>
+<span class="tag-float text-xs bg-[rgba(255,193,7,0.2)] text-[#FFC107] px-2 py-1 rounded">国潮</span>
+</div>
+<p class="text-sm text-[#B0B0B0] mb-4 flex-grow">结合国潮IP的信用卡品牌宣传视频。</p>
+<a class="btn-pulse inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] text-white font-medium py-2 px-4 rounded-lg transition hover:opacity-90 relative overflow-hidden" href="https://www.xinpianchang.com/a11499569?from=UserProfile" target="_blank">
+<i class="fas fa-play"></i>
+<span>观看作品</span>
+</a>
+</div>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] rounded-xl overflow-hidden flex flex-col fade-in">
+<div class="image-container aspect-ratio:1/1 overflow-hidden">
+<img alt="植与气泡水产品广告：透明瓶装气泡水，绿色植物背景，清新自然的视觉风格" class="w-full h-full object-contain" src="https://agent.qianwen.com/mos/e4b00ec247324ebb92aadb1e9383e4e3/a5a49968216b0e31707ebca72b370262"/>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<h3 class="text-lg font-bold mb-2">植与气泡水</h3>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="tag-float text-xs bg-[rgba(0,255,194,0.2)] text-[#00FFC2] px-2 py-1 rounded">产品视频</span>
+<span class="tag-float text-xs bg-[rgba(76,175,80,0.2)] text-[#4CAF50] px-2 py-1 rounded">清新</span>
+</div>
+<p class="text-sm text-[#B0B0B0] mb-4 flex-grow">健康饮品品牌的产品宣导视频。</p>
+<a class="btn-pulse inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] text-white font-medium py-2 px-4 rounded-lg transition hover:opacity-90 relative overflow-hidden" href="https://www.xinpianchang.com/a11494991?from=UserProfile" target="_blank">
+<i class="fas fa-play"></i>
+<span>观看作品</span>
+</a>
+</div>
+</div>
+
+<div class="card-hover bg-[#1E1E1E] rounded-xl overflow-hidden flex flex-col fade-in">
+<div class="image-container aspect-ratio:1/1 overflow-hidden">
+<img alt="华为手环4 Pro产品功能展示视频：黑色手环特写，运动健康数据界面演示" class="w-full h-full object-contain" src="https://agent.qianwen.com/mos/e4b00ec247324ebb92aadb1e9383e4e3/c731f39ea665559bd5730ba326ae61f5"/>
+</div>
+<div class="p-4 flex-grow flex flex-col">
+<h3 class="text-lg font-bold mb-2">HUAWEI BAND 4 PRO</h3>
+<div class="flex flex-wrap gap-2 mb-3">
+<span class="tag-float text-xs bg-[rgba(255,87,34,0.2)] text-[#FF5722] px-2 py-1 rounded">科技产品</span>
+<span class="tag-float text-xs bg-[rgba(0,191,255,0.2)] text-[#00BFFF] px-2 py-1 rounded">功能演示</span>
+</div>
+<p class="text-sm text-[#B0B0B0] mb-4 flex-grow">华为智能穿戴产品的功能展示视频。</p>
+<a class="btn-pulse inline-flex items-center justify-center gap-2 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] text-white font-medium py-2 px-4 rounded-lg transition hover:opacity-90 relative overflow-hidden" href="https://www.xinpianchang.com/a12720284?from=UserProfile" target="_blank">
+<i class="fas fa-play"></i>
+<span>观看作品</span>
+</a>
+</div>
+</div>
+
+</div>
+<div class="text-center mt-12 fade-in">
+<a class="btn-pulse inline-flex items-center gap-3 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] text-white font-bold py-3 px-8 rounded-full text-lg transition hover:opacity-90 relative overflow-hidden" href="https://www.xinpianchang.com/u10125366" target="_blank">
+<i class="fas fa-external-link-alt"></i>
+<span>查看更多作品</span>
+</a>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-[#121212]" id="achievements">
+<div class="container mx-auto px-4">
+<div class="text-center mb-16 fade-in">
+<h2 class="text-4xl font-bold mb-4">重点项目成就</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] mx-auto"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(0,191,255,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">华为母亲节视频</h3>
+<span class="text-xs bg-[rgba(0,255,194,0.2)] text-[#00FFC2] px-2 py-1 rounded">#viral传播</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">创意策划并制作的华为品牌温情短片。</p>
+<div class="text-[#00FFC2] font-bold text-lg">余承东转发，播放量破百万+</div>
+</div>
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(166,110,255,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">VGRASS × 敦煌联名影片</h3>
+<span class="text-xs bg-[rgba(166,110,255,0.2)] text-[#A66EFF] px-2 py-1 rounded">#品牌联名</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">融合时尚与敦煌文化的品牌形象片。</p>
+<div class="text-[#00FFC2] font-bold text-lg">提升品牌文化内涵与高端形象</div>
+</div>
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(0,255,255,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">联合利华家乐酱油分屏广告</h3>
+<span class="text-xs bg-[rgba(0,255,255,0.2)] text-[#00FFFF] px-2 py-1 rounded">#创意形式</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">采用分屏叙事手法展示产品使用场景。</p>
+<div class="text-[#00FFC2] font-bold text-lg">获得客户与市场高度认可</div>
+</div>
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(255,193,7,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">极限测试短片</h3>
+<span class="text-xs bg-[rgba(255,193,7,0.2)] text-[#FFC107] px-2 py-1 rounded">#ROI最佳</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">为电商产品制作的极限环境测试视频。</p>
+<div class="text-[#00FFC2] font-bold text-lg">成为平台ROI最佳转化素材</div>
+</div>
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(233,30,99,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">18CHALLENGE卡丁车场广告</h3>
+<span class="text-xs bg-[rgba(233,30,99,0.2)] text-[#E91E63] px-2 py-1 rounded">#运动品牌</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">动态捕捉卡丁车竞速激情的品牌广告。</p>
+<div class="text-[#00FFC2] font-bold text-lg">有效提升场地客流量与品牌知名度</div>
+</div>
+
+<div class="card-hover bg-gradient-to-br from-[#1E1E1E] to-[#2A2A2A] p-6 rounded-xl border border-[rgba(76,175,80,0.2)] fade-in">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold">TOPDONONE旗舰产品视频</h3>
+<span class="text-xs bg-[rgba(76,175,80,0.2)] text-[#4CAF50] px-2 py-1 rounded">#成本优化</span>
+</div>
+<p class="text-[#B0B0B0] mb-4">在有限预算下实现高质量的产品演示视频。</p>
+<div class="text-[#00FFC2] font-bold text-lg">低成本高质量交付，获内部表彰</div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="py-20 bg-[#0F0F0F]" id="contact">
+<div class="container mx-auto px-4">
+<div class="text-center mb-12 fade-in">
+<h2 class="text-4xl font-bold mb-4">保持联系</h2>
+<div class="w-24 h-1 bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] mx-auto"></div>
+</div>
+<div class="max-w-2xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+<div class="fade-in">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#00BFFF] to-[#A66EFF] flex items-center justify-center">
+<i class="fas fa-phone text-white"></i>
+</div>
+<div>
+<h3 class="font-bold text-lg">电话</h3>
+<a class="text-[#B0B0B0] hover:text-[#00BFFF] transition" href="tel:15217833625">15217833625</a>
+</div>
+</div>
+</div>
+<div class="fade-in">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#A66EFF] to-[#00FFC2] flex items-center justify-center">
+<i class="fas fa-envelope text-white"></i>
+</div>
+<div>
+<h3 class="font-bold text-lg">邮箱</h3>
+<span class="text-[#B0B0B0]">邮件地址未提供</span>
+</div>
+</div>
+</div>
+<div class="fade-in">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#00FFC2] to-[#00FFFF] flex items-center justify-center">
+<i class="fas fa-video text-white"></i>
+</div>
+<div>
+<h3 class="font-bold text-lg">作品主页</h3>
+<a class="text-[#B0B0B0] hover:text-[#00FFC2] transition" href="https://www.xinpianchang.com/u10125366" target="_blank">新片场主页</a>
+</div>
+</div>
+</div>
+<div class="fade-in">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-full bg-gradient-to-r from-[#00FFFF] to-[#00BFFF] flex items-center justify-center">
+<i class="fas fa-globe text-white"></i>
+</div>
+<div>
+<h3 class="font-bold text-lg">公司平台</h3>
+<a class="text-[#B0B0B0] hover:text-[#00FFFF] transition" href="https://www.topdon.com/" target="_blank">Topdon官网</a>
+</div>
+</div>
+</div>
+</div>
+<div class="fade-in text-center mt-12">
+<a class="inline-flex items-center gap-3 bg-[#1E1E1E] hover:bg-[#2A2A2A] border border-[#FF0000] text-white font-medium py-3 px-6 rounded-lg transition" href="https://www.youtube.com/@TopdonOfficial" target="_blank">
+<i class="fab fa-youtube text-[#FF0000]"></i>
+<span>访问 YouTube 频道</span>
+</a>
+</div>
+</div>
+</div>
+</section>
+</main>
+<footer class="bg-[#0A0A0A] py-8 border-t border-[#1E1E1E]">
+<div class="container mx-auto px-4">
+<div class="text-center text-[#888] text-sm">
+<p class="mb-2">本内容由AI生成，可能存在错误或不准确之处。请在使用前自行核实信息的准确性。</p>
+<p>© 2026 黄君杰 (Freddie). 保留所有权利。</p>
+</div>
+</div>
+</footer>
+<script>
+        // 页面初始化
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. 导航栏滚动效果
+            const header = document.querySelector('.site-header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+                // 导航高亮
+                updateNavHighlight();
+            });
+
+            // 2. 移动端菜单
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.toggle('hidden');
+            });
+            // 点击菜单项关闭菜单
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+
+            // 3. 滚动动画（Intersection Observer）
+            const fadeElements = document.querySelectorAll('.fade-in');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        // 如果是时间轴项目，添加激活类
+                        if (entry.target.classList.contains('timeline__item')) {
+                            entry.target.classList.add('active');
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            fadeElements.forEach(el => observer.observe(el));
+
+            // 4. 导航高亮函数
+            function updateNavHighlight() {
+                const sections = document.querySelectorAll('section[id]');
+                const navLinks = document.querySelectorAll('.nav-link');
+                let currentSection = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 100;
+                    const sectionHeight = section.clientHeight;
+                    if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                        currentSection = section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active', 'text-[#00BFFF]');
+                    if (link.getAttribute('href') === `#${currentSection}`) {
+                        link.classList.add('active', 'text-[#00BFFF]');
+                    } else {
+                        link.classList.add('text-[#E0E0E0]');
+                    }
+                });
+            }
+
+            // 5. 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 6. 视差滚动效果
+            const parallaxLayers = document.querySelectorAll('.parallax-layer-1, .parallax-layer-2');
+            window.addEventListener('scroll', function() {
+                const scrolled = window.pageYOffset;
+                parallaxLayers.forEach((layer, index) => {
+                    const speed = index === 0 ? 0.3 : 0.1;
+                    const yPos = -(scrolled * speed);
+                    layer.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+
+            // 7. 粒子背景
+            const canvas = document.getElementById('particle-canvas');
+            if (canvas) {
+                const ctx = canvas.getContext('2d');
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                const particles = [];
+                const particleCount = 50;
+
+                // 创建粒子
+                for (let i = 0; i < particleCount; i++) {
+                    particles.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        radius: Math.random() * 2 + 0.5,
+                        color: `rgba(${Math.floor(Math.random() * 100 + 155)}, ${Math.floor(Math.random() * 100 + 155)}, 255, ${Math.random() * 0.3 + 0.1})`,
+                        speedX: (Math.random() - 0.5) * 0.2,
+                        speedY: (Math.random() - 0.5) * 0.2
+                    });
+                }
+
+                function drawParticles() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    particles.forEach(p => {
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = p.color;
+                        ctx.fill();
+                        // 更新位置
+                        p.x += p.speedX;
+                        p.y += p.speedY;
+                        // 边界检查
+                        if (p.x < 0 || p.x > canvas.width) p.speedX *= -1;
+                        if (p.y < 0 || p.y > canvas.height) p.speedY *= -1;
+                    });
+                    requestAnimationFrame(drawParticles);
+                }
+                drawParticles();
+                // 窗口大小调整
+                window.addEventListener('resize', function() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
+                });
+            }
+
+            // 8. Hero标题逐字动画延迟设置
+            const heroSpans = document.querySelectorAll('.hero-title span');
+            heroSpans.forEach((span, index) => {
+                span.style.animationDelay = `${index * 0.05}s`;
+            });
+
+            // 9. 标签浮动动画交错延迟
+            const floatTags = document.querySelectorAll('.tag-float');
+            floatTags.forEach((tag, index) => {
+                tag.style.animationDelay = `${index * 0.2}s`;
+            });
+
+            // 初始高亮
+            updateNavHighlight();
+        });
+    </script>
+</body>
+</html>
