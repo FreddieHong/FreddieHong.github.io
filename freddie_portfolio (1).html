@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>黄君杰 Freddie - 视频内容主管 个人作品集</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4A90E2',
+                        primaryHover: '#3B82F6',
+                        lightBg: '#F8FAFC',
+                        cardBg: '#FFFFFF',
+                        textDark: '#1E293B',
+                        textMedium: '#475569',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'PingFang SC', 'SF Pro Display', 'system-ui', 'sans-serif'],
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 2s infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow-sm {
+                text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+            }
+            .glass-nav {
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+            }
+            .card-glow {
+                box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+            }
+        }
+    </style>
+    
+    <style>
+        .gradient-bg {
+            background: linear-gradient(-45deg, #eeffff, #d4e8f7, #f0f4ff, #f8f0fb);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        
+        .work-card:hover .static-img {
+            opacity: 0;
+        }
+        
+        .work-card:hover .gif-img {
+            opacity: 1;
+        }
+        
+        .work-card .gif-img {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .work-card .static-img {
+            transition: opacity 0.3s ease;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #4A90E2 0%, #60A5FA 100%);
+        }
+        
+        @media (min-width: 768px) {
+            .timeline-line {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+        
+        .timeline-dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #e2e8f0;
+            border: 3px solid white;
+            box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.3);
+            transition: all 0.5s ease;
+        }
+        
+        .timeline-dot.active {
+            background: #4A90E2;
+            box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.2), 0 0 20px rgba(74, 144, 226, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-lightBg text-textMedium font-sans">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-xl font-extrabold text-textDark">
+                    黄君杰 <span class="text-primary">Freddie</span>
+                </a>
+                
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#about" class="text-textMedium hover:text-primary transition-colors">关于我</a>
+                    <a href="#skills" class="text-textMedium hover:text-primary transition-colors">核心优势</a>
+                    <a href="#experience" class="text-textMedium hover:text-primary transition-colors">工作经历</a>
+                    <a href="#works" class="text-textMedium hover:text-primary transition-colors">作品集</a>
+                    
+                    <div class="flex items-center space-x-4">
+                        <a href="https://www.xinpianchang.com/u10125366" target="_blank" class="text-textMedium hover:text-primary transition-colors">
+                            <i class="fa fa-film text-lg"></i>
+                        </a>
+                        <a href="tel:15217833625" class="text-textMedium hover:text-primary transition-colors">
+                            <i class="fa fa-phone text-lg"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <button id="mobile-menu-btn" class="md:hidden text-textDark">
+                    <i class="fa fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden mt-2 px-4 py-4 glass-nav bg-white/90 rounded-lg mx-4">
+            <div class="flex flex-col space-y-4">
+                <a href="#about" class="text-textMedium hover:text-primary transition-colors">关于我</a>
+                <a href="#skills" class="text-textMedium hover:text-primary transition-colors">核心优势</a>
+                <a href="#experience" class="text-textMedium hover:text-primary transition-colors">工作经历</a>
+                <a href="#works" class="text-textMedium hover:text-primary transition-colors">作品集</a>
+                <div class="flex items-center space-x-4 pt-2 border-t border-gray-100">
+                    <a href="https://www.xinpianchang.com/u10125366" target="_blank" class="text-textMedium hover:text-primary transition-colors">
+                        <i class="fa fa-film mr-2"></i>新片场
+                    </a>
+                    <a href="tel:15217833625" class="text-textMedium hover:text-primary transition-colors">
+                        <i class="fa fa-phone mr-2"></i>电话
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-primary/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-100 rounded-full blur-3xl"></div>
+        </div>
+        
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <h1 id="hero-name" class="text-4xl md:text-6xl font-extrabold text-textDark mb-4 opacity-0">
+                黄君杰 <span class="text-primary">Freddie</span>
+            </h1>
+            <h2 id="hero-title" class="text-2xl md:text-4xl font-bold text-textDark mb-6 opacity-0">
+                视频内容主管 / 视频创意设计师
+            </h2>
+            <p id="hero-subtitle" class="text-lg md:text-xl text-textMedium mb-8 opacity-0">
+                团队管理、品宣策划、视频设计
+            </p>
+            
+            <div id="hero-info" class="flex flex-wrap justify-center gap-4 md:gap-8 opacity-0">
+                <div class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                    <span class="text-textMedium">工作经验: </span>
+                    <span class="text-primary font-bold">7年</span>
+                </div>
+                <div class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm">
+                    <span class="text-textMedium">期望城市: </span>
+                    <span class="text-primary font-bold">深圳</span>
+                </div>
+                <a href="tel:15217833625" class="bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm hover:bg-white transition-colors">
+                    <span class="text-textMedium">电话: </span>
+                    <span class="text-primary font-bold">15217833625</span>
+                </a>
+            </div>
+        </div>
+        
+        <a href="#about" class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-primary animate-bounce-slow">
+            <i class="fa fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-lightBg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-textDark mb-4">关于我</h2>
+                <p class="text-textMedium max-w-2xl mx-auto">
+                    从基层特效剪辑到团队管理，7年视频行业经验，专注于打造高转化的视觉内容与高效的团队运作
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-10 bg-lightBg pb-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Skill Card 1 -->
+                <div class="skill-card bg-cardBg rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 opacity-0">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-cogs text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-textDark mb-4">从特效 \ 剪辑干起，懂基层</h3>
+                    <p class="text-textMedium leading-relaxed">
+                        从特效岗位起步，逐渐兼顾剪辑，熟悉后期制作的全流程，后因对片子有独特理解，对画面节奏、镜头语言和技术细节有扎实经验，逐步成长为视频主管。能够从基层视角理解团队成员的实际操作与难点，管理时更有针对性。主动跟进 AI 变化,合理安全的带入工作流中。
+                    </p>
+                </div>
+                
+                <!-- Skill Card 2 -->
+                <div class="skill-card bg-cardBg rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 opacity-0">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-users text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-textDark mb-4">团队管理 & 跨部门协作</h3>
+                    <p class="text-textMedium leading-relaxed">
+                        具备跨部门项目经验，在甲方内部能在 UI、研发部门、市场部门之间高效沟通，推动项目顺利落地。能够把控时间节点和预算，确保内容品质和进度兼顾，提升 "不完美条件" 下的 "完美执行力"。
+                    </p>
+                </div>
+                
+                <!-- Skill Card 3 -->
+                <div class="skill-card bg-cardBg rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 opacity-0">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-lightbulb-o text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-textDark mb-4">理解客户需求的能力</h3>
+                    <p class="text-textMedium leading-relaxed">
+                        有丰富的客户对接经验，可以：快速抓取核心需求并转化为可落地的视觉与创意方案；注重换位思考，能在品牌表达与市场转化之间找到平衡；在预期方案和落地方案中寻求平衡点并向客户阐述，拉齐预期。三管齐下提升客户满意度与复购率。
+                    </p>
+                </div>
+                
+                <!-- Skill Card 4 -->
+                <div class="skill-card bg-cardBg rounded-2xl p-8 shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1.5 opacity-0">
+                    <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fa fa-line-chart text-primary text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-textDark mb-4">项目成本测算与团队管理统筹</h3>
+                    <p class="text-textMedium leading-relaxed">
+                        参与影棚搭建、设备配置及团队架构的规划，负责各项费用梳理与成本测算，形成完整方案并提交财务审核评估，通过审批反馈明晰企业立项标准与投入边界。同时统筹团队日常管理与人员配置，在职期间实现核心人才流失率 0%，保障团队稳定高效运转。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-textDark mb-4">工作经历</h2>
+                <p class="text-textMedium max-w-2xl mx-auto">
+                    从广告制作到品牌方内容管理，积累了丰富的全流程项目经验
+                </p>
+            </div>
+            
+            <div class="relative">
+                <!-- Timeline line -->
+                <div class="timeline-line"></div>
+                
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item relative mb-12 opacity-0">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <!-- Left side - Company info -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0 mb-4 md:mb-0">
+                            <div class="inline-block md:text-right">
+                                <h3 class="text-xl font-bold text-textDark">上海荷创数字科技</h3>
+                                <p class="text-primary font-medium">视频设计 & 后期导演 & 广告创意</p>
+                                <p class="text-sm text-textMedium mt-1">2018.11 - 2022.4</p>
+                                <p class="text-sm text-textMedium mt-2 max-w-xs">
+                                    专业 TVC 广告制作公司，服务华为、星巴克、卡地亚等知名品牌
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline dot -->
+                        <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 timeline-dot"></div>
+                        
+                        <!-- Right side - Details -->
+                        <div class="md:w-1/2 md:pl-12 pl-10">
+                            <div class="bg-lightBg rounded-2xl p-6 shadow-md">
+                                <p class="text-textMedium mb-4">
+                                    从包装与特效起步，因剪辑能力突出逐步晋升为视频主管，全面负责视频创意制定、细节沟通、拍摄现场统筹及制作环节把控。在职期间带领团队由 4 人扩展至 15 人，并推动多个客户基于良好合作体验签署年度框架协议。
+                                </p>
+                                <ul class="space-y-3 text-textMedium">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>华为</strong>：负责多个核心产品广告片，原创母亲节视频获余承东转发，播放量 100万+</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>VGRASS</strong>：主导敦煌联名系列品牌影片，促成年度框架合作</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>联合利华家乐酱油</strong>：创意分屏特效广告，增强品牌记忆点</span>
+                                    </li>
+                                </ul>
+                                <a href="https://www.xinpianchang.com/a12720274?from=UserProfile" target="_blank" class="inline-block mt-4 text-primary hover:text-primaryHover transition-colors">
+                                    查看作品 <i class="fa fa-external-link ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item relative mb-12 opacity-0">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <!-- Left side - Company info -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0 mb-4 md:mb-0">
+                            <div class="inline-block md:text-right">
+                                <h3 class="text-xl font-bold text-textDark">深圳虎一科技有限公司</h3>
+                                <p class="text-primary font-medium">视频内容负责人</p>
+                                <p class="text-sm text-textMedium mt-1">2023.9 - 2024.7</p>
+                                <p class="text-sm text-textMedium mt-2 max-w-xs">
+                                    专注智能厨具的创新型制造企业，产品远销欧美与东南亚
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline dot -->
+                        <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 timeline-dot"></div>
+                        
+                        <!-- Right side - Details -->
+                        <div class="md:w-1/2 md:pl-12 pl-10">
+                            <div class="bg-lightBg rounded-2xl p-6 shadow-md">
+                                <ul class="space-y-4 text-textMedium">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>策划高转化系列</strong>：建立选题筛选机制，极限测试短片跑出当期 ROI 最佳结果</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>推动团队产线优化</strong>：分组机制提升效率，两周产能从 3~4 条增长至 64 条</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>搭建创意学习系统</strong>：建立"阅片+复盘"机制，持续提升团队创意能力</span>
+                                    </li>
+                                </ul>
+                                <a href="https://www.xinpianchang.com/a13433297?from=UserProfile" target="_blank" class="inline-block mt-4 text-primary hover:text-primaryHover transition-colors">
+                                    查看作品 <i class="fa fa-external-link ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item relative mb-12 opacity-0">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <!-- Left side - Company info -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0 mb-4 md:mb-0">
+                            <div class="inline-block md:text-right">
+                                <h3 class="text-xl font-bold text-textDark">香港 FINI Media 创意广告公司</h3>
+                                <p class="text-primary font-medium">初创团队成员 & 视频部门负责人</p>
+                                <p class="text-sm text-textMedium mt-1">2024.7 - 2025.8</p>
+                                <p class="text-sm text-textMedium mt-2 max-w-xs">
+                                    面向香港市场的广告内容团队，专注企业营销与KOL营销
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline dot -->
+                        <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 timeline-dot"></div>
+                        
+                        <!-- Right side - Details -->
+                        <div class="md:w-1/2 md:pl-12 pl-10">
+                            <div class="bg-lightBg rounded-2xl p-6 shadow-md">
+                                <p class="text-textMedium mb-4">
+                                    负责统筹与管理公司视频内容全流程，把控项目拍摄制作、资源协调、脚本决策与后期指导
+                                </p>
+                                <ul class="space-y-3 text-textMedium">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>INJOI</strong>：统筹KOL与摄制组拍摄，提升店铺曝光与知名度</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>个人IP账号</strong>：主导内容把控，首月高曝光并转化多位高净值客户</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>18CHALLENGE卡丁车场</strong>：广告项目带动营业额超预期增长</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>足君好集团</strong>：重塑线上视觉体系，完成品牌形象升级</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item relative opacity-0">
+                    <div class="flex flex-col md:flex-row items-start">
+                        <!-- Left side - Company info -->
+                        <div class="md:w-1/2 md:pr-12 md:text-right pl-10 md:pl-0 mb-4 md:mb-0">
+                            <div class="inline-block md:text-right">
+                                <h3 class="text-xl font-bold text-textDark">深圳鼎匠创新科技</h3>
+                                <p class="text-primary font-medium">影视主管</p>
+                                <p class="text-sm text-textMedium mt-1">2025.9 - 至今</p>
+                                <p class="text-sm text-textMedium mt-2 max-w-xs">
+                                    汽车智能诊断设备和热成像仪创新企业，员工超700人
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <!-- Timeline dot -->
+                        <div class="absolute left-0 md:left-1/2 transform md:-translate-x-1/2 timeline-dot"></div>
+                        
+                        <!-- Right side - Details -->
+                        <div class="md:w-1/2 md:pl-12 pl-10">
+                            <div class="bg-lightBg rounded-2xl p-6 shadow-md">
+                                <p class="text-textMedium mb-4">
+                                    全面负责跨区域（湖南 + 深圳）7人影视团队管理，主导项目全流程管理、视频编剧与创意提案
+                                </p>
+                                <ul class="space-y-3 text-textMedium">
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>TOPDON ONE旗舰项目</strong>：以远低于常规成本完成4支高品质商业影片，超高性价比交付</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>TS004PRO热成像仪</strong>：制定应急预案，确保关键画面交付零风险</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>制定团队运作SOP</strong>：标准化制作流程，提升产出效率与质量稳定性</span>
+                                    </li>
+                                    <li class="flex items-start">
+                                        <i class="fa fa-check-circle text-primary mt-1 mr-2"></i>
+                                        <span><strong>资源管理及跨部门沟通</strong>：规划影棚升级，协调工程师资源保障项目落地</span>
+                                    </li>
+                                </ul>
+                                <a href="https://www.youtube.com/@TopdonOfficial" target="_blank" class="inline-block mt-4 text-primary hover:text-primaryHover transition-colors">
+                                    查看频道 <i class="fa fa-external-link ml-1"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-20 bg-lightBg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-textDark mb-4">作品集</h2>
+                <p class="text-textMedium max-w-2xl mx-auto">
+                    精选代表作品，鼠标悬停查看动态预览，点击查看完整视频
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Work Item 1 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11481656?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/starbucks/600/400" alt="星巴克 H5 动画" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/starbucks-gif/600/400" alt="星巴克 H5 动画" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">星巴克 H5 动画</h3>
+                            <p class="text-white/80 text-sm">画面设计，动效制作，剪辑，配乐</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 2 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11499569?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/pingan/600/400" alt="平安银行 - 哪吒信用卡" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/pingan-gif/600/400" alt="平安银行 - 哪吒信用卡" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">平安银行 - 哪吒信用卡</h3>
+                            <p class="text-white/80 text-sm">画面设计，动效制作，剪辑，配乐</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 3 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11494991?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/zhiyu/600/400" alt="植与气泡水" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/zhiyu-gif/600/400" alt="植与气泡水" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">植与气泡水</h3>
+                            <p class="text-white/80 text-sm">剪辑，配乐，特效镜头制作</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 4 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a12720284?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/band4/600/400" alt="HUAWEI BAND 4 PRO" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/band4-gif/600/400" alt="HUAWEI BAND 4 PRO" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">HUAWEI BAND 4 PRO</h3>
+                            <p class="text-white/80 text-sm">剪辑、调色、现场特效拍摄</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 5 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a12720274?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/band6/600/400" alt="华为手环 B6" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/band6-gif/600/400" alt="华为手环 B6" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">华为手环 B6</h3>
+                            <p class="text-white/80 text-sm">后期全流程把控，特效拍摄</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 6 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11481602?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/clear/600/400" alt="清扬男士金双系列" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/clear-gif/600/400" alt="清扬男士金双系列" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">清扬男士金双系列</h3>
+                            <p class="text-white/80 text-sm">剪辑，配乐，调色，动效</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 7 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11481614?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/huawei-y6p/600/400" alt="华为手机 Y6P - 师生篇" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/huawei-y6p-gif/600/400" alt="华为手机 Y6P - 师生篇" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">华为手机 Y6P - 师生篇</h3>
+                            <p class="text-white/80 text-sm">剪辑，配乐</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 8 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a11493941?from=UserProfile" target="_blank">
+                        <img src="https://picsum.photos/seed/cartier/600/400" alt="邓紫棋 - 卡地亚" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/cartier-gif/600/400" alt="邓紫棋 - 卡地亚" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">邓紫棋 - 卡地亚</h3>
+                            <p class="text-white/80 text-sm">剪辑，配乐</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 9 - 新增 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a13649455?from=UserProfile" target="_blank">
+                        <img src="封面.png" alt="汽车诊断仪宣传片" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/cardiag-gif/600/400" alt="汽车诊断仪宣传片" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">汽车诊断仪宣传片</h3>
+                            <p class="text-white/80 text-sm">导演,后期;特效设计,策划</p>
+                        </div>
+                    </a>
+                </div>
+                
+                <!-- Work Item 10 - 新增 -->
+                <div class="work-card group relative rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 opacity-0">
+                    <a href="https://www.xinpianchang.com/a13649469?from=UserProfile&ws_referrer_origin=https%3A%2F%2Fwww.xinpianchang.com%2Fu10125366" target="_blank">
+                        <img src="封面 2.png" alt="热成像仪卖点视频" class="static-img w-full h-64 object-cover">
+                        <img src="https://picsum.photos/seed/thermal-gif/600/400" alt="热成像仪卖点视频" class="gif-img absolute inset-0 w-full h-64 object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <h3 class="text-white font-bold">热成像仪卖点视频</h3>
+                            <p class="text-white/80 text-sm">策划;导演;动画设计</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 bg-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-2xl font-bold text-textDark mb-6">感谢观看</h2>
+            <p class="text-textMedium mb-8">
+                期待能有机会加入贵团队，用我的专业经验为公司的品牌视觉与内容增长贡献力量
+            </p>
+            
+            <div class="flex flex-wrap justify-center gap-6 mb-8">
+                <a href="mailto:294447547@qq.com" class="flex items-center text-textMedium hover:text-primary transition-colors">
+                    <i class="fa fa-envelope mr-2"></i>
+                    294447547@qq.com
+                </a>
+                <a href="tel:15217833625" class="flex items-center text-textMedium hover:text-primary transition-colors">
+                    <i class="fa fa-phone mr-2"></i>
+                    15217833625
+                </a>
+                <a href="https://www.xinpianchang.com/u10125366" target="_blank" class="flex items-center text-textMedium hover:text-primary transition-colors">
+                    <i class="fa fa-film mr-2"></i>
+                    新片场主页
+                </a>
+            </div>
+            
+            <div class="pt-8 border-t border-gray-100">
+                <p class="text-sm text-textMedium/60">
+                    © 2025 黄君杰 Freddie. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-btn').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass-nav', 'bg-white/80', 'shadow-sm');
+            } else {
+                navbar.classList.remove('glass-nav', 'bg-white/80', 'shadow-sm');
+            }
+        });
+        
+        // GSAP animations
+        gsap.registerPlugin(ScrollTrigger);
+        
+        // Hero section animations
+        const heroTl = gsap.timeline();
+        heroTl.to('#hero-name', {
+            opacity: 1,
+            y: 0,
+            duration: 0.8,
+            ease: "power2.out",
+            filter: "blur(0px)",
+            y: -20,
+            onStart: function() {
+                gsap.set('#hero-name', {y: 20, filter: "blur(10px)"});
+            }
+        })
+        .to('#hero-title', {
+            opacity: 1,
+            duration: 0.8,
+            ease: "power2.out",
+            filter: "blur(0px)",
+            y: -20,
+            onStart: function() {
+                gsap.set('#hero-title', {y: 20, filter: "blur(10px)"});
+            }
+        }, "-=0.4")
+        .to('#hero-subtitle', {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            y: -10,
+            onStart: function() {
+                gsap.set('#hero-subtitle', {y: 10});
+            }
+        }, "-=0.2")
+        .to('#hero-info', {
+            opacity: 1,
+            duration: 0.6,
+            ease: "power2.out",
+            y: -10,
+            onStart: function() {
+                gsap.set('#hero-info', {y: 10});
+            }
+        }, "-=0.2");
+        
+        // Skills cards animation
+        gsap.utils.toArray('.skill-card').forEach((card, i) => {
+            ScrollTrigger.create({
+                trigger: card,
+                start: "top 85%",
+                onEnter: () => {
+                    gsap.to(card, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                        delay: i * 0.1
+                    });
+                }
+            });
+            gsap.set(card, {y: 30});
+        });
+        
+        // Timeline items animation
+        gsap.utils.toArray('.timeline-item').forEach((item, i) => {
+            const dot = item.querySelector('.timeline-dot');
+            
+            ScrollTrigger.create({
+                trigger: item,
+                start: "top 75%",
+                onEnter: () => {
+                    gsap.to(item, {
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power2.out"
+                    });
+                    
+                    // Activate dot
+                    setTimeout(() => {
+                        dot.classList.add('active');
+                    }, 300);
+                }
+            });
+        });
+        
+        // Works cards animation
+        gsap.utils.toArray('.work-card').forEach((card, i) => {
+            ScrollTrigger.create({
+                trigger: card,
+                start: "top 85%",
+                onEnter: () => {
+                    gsap.to(card, {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        ease: "power2.out",
+                        delay: i * 0.05
+                    });
+                }
+            });
+            gsap.set(card, {y: 30});
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
